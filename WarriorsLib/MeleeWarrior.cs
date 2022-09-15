@@ -1,22 +1,26 @@
-﻿namespace WarriorsLib;
+﻿using System.Reflection.Emit;
+
+namespace WarriorsLib;
 
 public class MeleeWarrior : Warrior
 {
     public MeleeWarrior(IAttackGenerator generator) : base(generator)
     {
-        // 80% chance of attacking with melee
-        generator.Setup(80, AttackHow.AttackWithMelee);
-        // 10% chance of attacking with magic
-        generator.Setup(10, AttackHow.AttackWithMagic);
-        // 10% chance of missing
-        generator.Setup(10, AttackHow.Miss);
+        
     }
 
     public override void Attack(Warrior opponent, AttackRange range)
     {
         if(range == AttackRange.Melee)
         {
-            AttackHow attackHow = _generator.GenerateAtack();
+            _attackGenerator.Clear();
+            // 80% chance of attacking with melee
+            _attackGenerator.Setup(80, AttackHow.AttackWithMelee);
+            // 10% chance of attacking with magic
+            _attackGenerator.Setup(10, AttackHow.AttackWithMagic);
+            // 10% chance of missing
+            _attackGenerator.Setup(10, AttackHow.Miss);
+            AttackHow attackHow = _attackGenerator.GenerateAtack();
             Damage damage;
             switch (attackHow)
             {

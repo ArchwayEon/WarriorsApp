@@ -47,4 +47,9 @@ public class AttackGenerator : IAttackGenerator
     {
         _attackChances.Add(attackHow, percentageChance);
     }
+
+    public void Clear()
+    {
+        _attackChances.Clear();
+    }
 }

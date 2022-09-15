@@ -7,11 +7,11 @@ public abstract class Warrior
     public decimal MagicPower { get; private set; }
     public int DefensePercentage { get; private set; }
 
-    protected IAttackGenerator _generator;
+    protected IAttackGenerator _attackGenerator;
 
     public Warrior(IAttackGenerator generator)
     {
-        _generator = generator;
+        _attackGenerator = generator;
     }
 
     public abstract void Attack(Warrior warrior, AttackRange range);
